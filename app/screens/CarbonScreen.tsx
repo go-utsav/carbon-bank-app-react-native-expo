@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import TopNavbar from '../components/TopNavbar';
+import CarbonGraphs from '../components/CarbonGraphs';
 
 interface ActivityItemProps {
   title: string;
@@ -13,28 +14,15 @@ interface ActivityItemProps {
 const CarbonScreen = () => {
   return (
     <ScrollView style={styles.container}>
-        <TopNavbar />
+      <TopNavbar />
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.greeting}>Good Evening</Text>
         <Text style={styles.name}>John Doe</Text>
       </View>
 
-      {/* Carbon Score Card */}
-      <View style={styles.scoreCard}>
-        <View style={styles.scoreContent}>
-          <Text style={styles.scoreTitle}>Good job!</Text>
-          <View style={styles.circularProgress}>
-            <Text style={styles.scoreValue}>148kg</Text>
-            <Text style={styles.scoreLabel}>Today</Text>
-          </View>
-          <View style={styles.navigationDots}>
-            <View style={[styles.dot, styles.activeDot]} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-          </View>
-        </View>
-      </View>
+      {/* Carbon Graphs */}
+      <CarbonGraphs />
 
       {/* Quick Actions */}
       <View style={styles.quickActions}>
