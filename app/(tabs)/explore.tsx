@@ -1,109 +1,247 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+export default function ExploreScreen() {
+  const [location, setLocation] = useState('London');
 
-export default function TabTwoScreen() {
+  const categories = [
+    { id: '1', name: 'Restaurants', image: 'https://via.placeholder.com/80' },
+    { id: '2', name: 'EV Stations', image: 'https://via.placeholder.com/80' },
+    { id: '3', name: 'Groceries', image: 'https://via.placeholder.com/80' },
+    { id: '4', name: 'Pharmacies', image: 'https://via.placeholder.com/80' },
+  ];
+
+  const restaurants = [
+    { id: '1', name: 'Vapiano', rating: 4.8, reviews: 500, distance: 0.7, image: 'https://via.placeholder.com/80' },
+    { id: '2', name: 'Urban Kitchen', rating: 4.5, reviews: 300, distance: 1.2, image: 'https://via.placeholder.com/80' },
+  ];
+
+  const evStations = [
+    { id: '1', name: 'Tesla Supercharger', rating: 4.9, reviews: 200, distance: 0.5, image: 'https://via.placeholder.com/80' },
+    { id: '2', name: 'BP Chargemaster', rating: 4.2, reviews: 150, distance: 1.0, image: 'https://via.placeholder.com/80' },
+  ];
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <ScrollView style={styles.container}>
+      {/* Status Bar */}
+      <View style={styles.statusBar}>
+        <Text style={styles.time}>16:43</Text>
+        <View style={styles.statusIcons}>
+          <Icon name="signal-cellular-alt" size={16} color="#000" />
+          <Icon name="battery-full" size={16} color="#00C2A8" />
+        </View>
+      </View>
+
+      {/* Location Section */}
+      <View style={styles.locationSection}>
+        <View style={styles.locationSearchContainer}>
+          <Icon name="location-on" size={20} color="#FF6B6B" />
+          <TextInput
+            value={location}
+            onChangeText={setLocation}
+            placeholder="Enter location"
+            style={styles.locationInput}
+          />
+          <TouchableOpacity style={styles.searchButton}>
+            <Icon name="search" size={20} color="#00C2A8" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.locationInfo}>
+          <Text style={styles.locationText}>Now</Text>
+          <Text style={styles.locationCity}>{location}</Text>
+        </View>
+      </View>
+
+      {/* Search Bar */}
+      <View style={styles.searchBar}>
+        <Icon name="search" size={20} color="#AAA" />
+        <TextInput
+          placeholder="Search for restaurants, EV stations or groceries"
+          style={styles.searchInput}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
-      </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
-          </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
+      </View>
+
+      {/* Categories */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Categories</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {categories.map(category => (
+            <TouchableOpacity key={category.id} style={styles.categoryTile}>
+              <Image source={{ uri: category.image }} style={styles.categoryImage} />
+              <Text style={styles.categoryLabel}>{category.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* Nearby Restaurants */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Nearby Restaurants</Text>
+        {restaurants.map(restaurant => (
+          <View key={restaurant.id} style={styles.featuredItem}>
+            <Image source={{ uri: restaurant.image }} style={styles.featuredImage} />
+            <View style={styles.featuredInfo}>
+              <Text style={styles.featuredName}>{restaurant.name}</Text>
+              <Text style={styles.featuredRating}>
+                {Array(5).fill(null).map((_, i) => i < Math.floor(restaurant.rating) ? '★' : '☆').join('')}
+                {restaurant.rating} ({restaurant.reviews})
+              </Text>
+              <Text style={styles.featuredDistance}>{restaurant.distance} miles away</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+
+      {/* EV Stations */}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>EV Charging Stations</Text>
+        {evStations.map(station => (
+          <View key={station.id} style={styles.featuredItem}>
+            <Image source={{ uri: station.image }} style={styles.featuredImage} />
+            <View style={styles.featuredInfo}>
+              <Text style={styles.featuredName}>{station.name}</Text>
+              <Text style={styles.featuredRating}>
+                {Array(5).fill(null).map((_, i) => i < Math.floor(station.rating) ? '★' : '☆').join('')}
+                {station.rating} ({station.reviews})
+              </Text>
+              <Text style={styles.featuredDistance}>{station.distance} miles away</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: '#F8F8F8',
+    padding: 15,
   },
-  titleContainer: {
+  statusBar: {
     flexDirection: 'row',
-    gap: 8,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 5,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  time: {
+    fontSize: 14,
+  },
+  statusIcons: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  locationSection: {
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  locationSearchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  locationInput: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 16,
+  },
+  searchButton: {
+    marginLeft: 10,
+  },
+  locationInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  locationText: {
+    fontSize: 12,
+    color: '#888',
+    marginRight: 10,
+  },
+  locationCity: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  searchBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#888',
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 10,
+  },
+  categoryTile: {
+    width: 80,
+    height: 80,
+    borderRadius: 15,
+    marginRight: 10,
+    backgroundColor: '#F0F0F0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  categoryImage: {
+    width: '100%',
+    height: '100%',
+  },
+  categoryLabel: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    color: '#FFF',
+    padding: 5,
+    textAlign: 'center',
+  },
+  featuredItem: {
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+  },
+  featuredImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 10,
+    marginRight: 15,
+  },
+  featuredInfo: {
+    flex: 1,
+  },
+  featuredName: {
+    fontWeight: '600',
+    marginBottom: 5,
+  },
+  featuredRating: {
+    color: '#FFC107',
+    marginBottom: 5,
+  },
+  featuredDistance: {
+    color: '#888',
+    fontSize: 14,
   },
 });

@@ -21,14 +21,14 @@ const ProfileScreen = () => {
           source={require('../../assets/images/profile-pic.jpg')}
           style={styles.profileImage}
         />
-        <Text style={styles.name}>Ella Johanny</Text>
-        <Text style={styles.email}>ella@monzo.com</Text>
+        <Text style={styles.name}>Shalini Yadav</Text>
+        <Text style={styles.email}>Shalini@gmail.com</Text>
         <View style={styles.betaTag}>
-          <Text style={styles.betaText}>BETA</Text>
+          <Text style={styles.betaText}>PRO</Text>
         </View>
         <Text style={styles.userInfo}>
-          Monzo user #42,345{'\n'}
-          since September 2016
+          Carbon Bank user #42,345{'\n'}
+          since April 2025
         </Text>
       </View>
 
@@ -44,7 +44,7 @@ const ProfileScreen = () => {
       {/* Links Section */}
       <View style={styles.linksSection}>
         <TouchableOpacity style={styles.link}>
-          <Text style={styles.linkText}>About Monzo</Text>
+          <Text style={styles.linkText}>About Carbon Bank</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.link}>
           <Text style={styles.linkText}>Terms & Conditions</Text>

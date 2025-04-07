@@ -9,6 +9,7 @@ import TopNavbar from '../components/TopNavbar';
 import BalanceCard from '../components/BalanceCard';
 import QuickActions from '../components/QuickActions';
 import TransactionSection from '../components/TransactionSection';
+import CarbonGraphs from '../components/CarbonGraphs';
 
 const HomeScreen = () => {
   return (
